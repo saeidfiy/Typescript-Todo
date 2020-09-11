@@ -19,7 +19,7 @@ const initialtodos:Todo[]=[
 
 
 function App() {
-  const [todos, setTodos] = useState(initialtodos)
+  const [todos, setTodos] = useState<Todo[]>(initialtodos)
 
   const toggleTodo = (selectedTodo:Todo)=>{
     const newTodos = todos.map(todo=>{
@@ -39,11 +39,15 @@ function App() {
     setTodos([...todos,newTodo])
   }
 
+  const deleteTo:deleteTo = (todoKey:number)=>{
+    const newTodos = todos.filter((todo,key)=>key !== todoKey)
+    setTodos(newTodos)
+  }
 
 
   return (
     <div className="App">
-      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <TodoList todos={todos} deleteTo={deleteTo} toggleTodo={toggleTodo} />
       <AddTodoForm addTodo={addTodo} />
     </div>
   );
